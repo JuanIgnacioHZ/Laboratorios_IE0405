@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Laboratorio de programación</title>
+
+		<!-- Reveal.js (la plataforma de presentaciones) -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/beige.min.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/monokai.min.css">
+
+		<!-- Bootstrap (formato adicional) -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+		<!-- FontAwesome (iconos) -->
+		<script src="https://kit.fontawesome.com/1ae7c4e024.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Portada -->
+				<section>
+					<p class="small">
+						Universidad de Costa Rica <br>
+						Escuela de Ingeniería Eléctrica <br>
+						IE0405 - Modelos Probabilísticos de Señales y Sistemas
+					</p>
+					<h3><i class="fa-solid fa-laptop-code"></i></h3>
+					<h1>Laboratorio de programación</h1>
+					<p>2023 - II</p>
+				</section>
+
+				<!-- Datos del grupo del laboratorio -->
+				<section>
+					<h2>Estudio estadísitico de un dataset de canciones fechadas entre 1950 y 2019</h2>
+					<!-- Opcional: icono de https://fontawesome.com/search?o=r&m=free -->
+					<h3><i class="fa-solid fa-person-through-window"></i></h3>
+					<p>
+					Estudiantes:
+					</p>
+					<ul>
+						<li>B26233 - César Sánchez</li>
+						<li>C08064 - Jairo Valverde</li>
+						<li>B93826 - Juan Ignacio Hernández Zamora</li>
+					</ul>
+				</section>
+
+				<!-- Sobre la entrega -->
+				<section>
+					<h3>Archivos entregados</h3>
+					<h3><i class="fa-solid fa-folder-open"></i></h3>
+					<ul class=small>
+						<li><code>Laboratorio_1.ipynb</code>: Presentación y discusión del código de <em>python</em>.</li>
+						<li><code>Laboratorio_1_scripts.py</code>: Script que presenta los resutlados como texto.</li>
+						<li><code>tcc_ceds_music.csv</code>: Dataset tomado de <em>Kaggle</em>, más información en la siguiente diapositiva.</li>
+						<li><code>Laboratorio_1.html</code>: Presentación ordenada de resultados del proyecto.</li>
+						<li><code>img</code>: Carpeta con gráficos en <em>svg</em>.</li>
+					</ul>
+				</section>
+
+				<!-- Datos del problema -->
+				<section>
+					<section id="datos">
+						<h1>Dataset escogido</h1>
+						<h1><i class="fa-solid fa-music"></i></h1>
+						<h3><i class="fa-solid fa-down-long"></i></h3>
+					</section>
+
+					<!-- Descripción del dataset -->
+					<section>
+						<h3>Descripción de los datos</h3>
+						<h3><i class="fa-solid fa-database"></i></h3>
+						<p class="small">
+						Se obtuvieron de <a href="https://www.kaggle.com/datasets/saurabhshahane/music-dataset-1950-to-2019" target="_blank"><em>Kaggle</em></a>. Según sus autores, proveen una lista de letras de canciones de 1950 a 2019 y están clasificadas en las categorías que se detallan en el siguiente ejemplo. Luego de revisar los requerimientos del enunciado, se encuentra que cumple todos.
+						Al estudiar la tabla provista, se optó por centrar los estudios en las columnas de volumen (<em>loudness</em>), género (<em>genre</em>), tema (<em>topic</em>) y qué tan bailable es (<em>danceability</em>).
+						</p>
+					</section>
+
+					<!-- Muestra de datos -->
+					<section>
+						<h3>Muestra de datos</h3>
+						<h3><i class="fa-solid fa-magnifying-glass-chart"></i></h3>
+						<div class="small table-responsive">
+							<table class="table small">
+							  <thead>
+							    <tr style="text-align: right;">
+							      <th></th>
+							      <th>Unnamed: 0</th>
+							      <th>artist_name</th>
+							      <th>track_name</th>
+							      <th>release_date</th>
+							      <th>genre</th>
+							      <th>len</th>
+							      <th>dating</th>
+							      <th>violence</th>
+							      <th>world/life</th>
+							      <th>night/time</th>
+							      <th>shake the audience</th>
+							      <th>family/gospel</th>
+							      <th>romantic</th>
+							      <th>communication</th>
+							      <th>obscene</th>
+							      <th>music</th>
+							      <th>movement/places</th>
+							      <th>light/visual perceptions</th>
+							      <th>family/spiritual</th>
+							      <th>like/girls</th>
+							      <th>sadness</th>
+							      <th>feelings</th>
+							      <th>danceability</th>
+							      <th>loudness</th>
+							      <th>acousticness</th>
+							      <th>instrumentalness</th>
+							      <th>valence</th>
+							      <th>energy</th>
+							      <th>topic</th>
+							      <th>age</th>
+							      <th>categorical_loudness</th>
+							      <th>categorical_danceability</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr>
+							      <th>19004</th>
+							      <td>58888</td>
+							      <td>glenn miller</td>
+							      <td>the little man who wasn't there</td>
+							      <td>1991</td>
+							      <td>jazz</td>
+							      <td>59</td>
+							      <td>0.001316</td>
+							      <td>0.059445</td>
+							      <td>0.001316</td>
+							      <td>0.105798</td>
+							      <td>0.001316</td>
+							      <td>0.086459</td>
+							      <td>0.001316</td>
+							      <td>0.001316</td>
+							      <td>0.001316</td>
+							      <td>0.001316</td>
+							      <td>0.329684</td>
+							      <td>0.001316</td>
+							      <td>0.028073</td>
+							      <td>0.001316</td>
+							      <td>0.373436</td>
+							      <td>0.001316</td>
+							      <td>0.728149</td>
+							      <td>0.638028</td>
+							      <td>0.871486</td>
+							      <td>0.037551</td>
+							      <td>0.570280</td>
+							      <td>0.422404</td>
+							      <td>sadness</td>
+							      <td>0.414286</td>
+							      <td>mid</td>
+							      <td>danceable</td>
+							    </tr>
+							    <tr>
+							      <th>25729</th>
+							      <td>76652</td>
+							      <td>misfits</td>
+							      <td>american psycho</td>
+							      <td>1997</td>
+							      <td>rock</td>
+							      <td>95</td>
+							      <td>0.001144</td>
+							      <td>0.704463</td>
+							      <td>0.001144</td>
+							      <td>0.001144</td>
+							      <td>0.001144</td>
+							      <td>0.001144</td>
+							      <td>0.090129</td>
+							      <td>0.001144</td>
+							      <td>0.061046</td>
+							      <td>0.001144</td>
+							      <td>0.001144</td>
+							      <td>0.001144</td>
+							      <td>0.070391</td>
+							      <td>0.001144</td>
+							      <td>0.057953</td>
+							      <td>0.001144</td>
+							      <td>0.477959</td>
+							      <td>0.781376</td>
+							      <td>0.000479</td>
+							      <td>0.000581</td>
+							      <td>0.061212</td>
+							      <td>0.994995</td>
+							      <td>violence</td>
+							      <td>0.328571</td>
+							      <td>high</td>
+							      <td>undanceable</td>
+							    </tr>
+							  </tbody>
+							</table>
+						</div>
+
+					</section>
+
+					<!-- Portada de Muestra de ejemplos -->
+					<section>
+						<h2>Gráficas de las categorías estudiadas</h2>
+						<h3><i class="fa-solid fa-eye"></i></h3>
+						<p class=small>
+						Se presentan histogramas y gráficas de cómo se distribuyen los datos de las columnas estudiadas.
+						</p>
+						<p class=small>
+						En cuanto a la usabilidad de las categorías, las de <em>loudness</em> y <em>danceability</em> se modificaron para pasar la primero a valores categóricos (de un tercio cada uno) en tres tipos: alto, medio y bajo. Y el segundo a binario (cada 50%) para hacer pruebas de Bernoulli.
+						</p>
+					</section>
+
+
+					<!-- Histograma de loudnes -->
+					<section>
+						<h3>Histograma de <em>loudness </em> original</h3>
+						<h3><i class="fa-solid fa-chart-column"></i></h3>
+						<p>
+							<img src="img/loudness_graph.svg" alt="">
+						</p>
+					</section>
+
+					<!-- Cant de canciones por nivel de vol -->
+					<section>
+						<h3>Cantidad de canciones por nivel de volumen</h3>
+						<h3><i class="fa-solid fa-chart-column"></i></h3>
+						<p>
+							<img src="img/categorical_loudness_graph.svg" alt="">
+						</p>
+					</section>
+
+					<!-- Histograma de bailabilidad -->
+					<section>
+						<h3>Histograma de <em>danceability </em>  original</h3>
+						<h3><i class="fa-solid fa-chart-column"></i></h3>
+						<p>
+							<img src="img/danceability_graph.svg" alt="">
+						</p>
+					</section>
+
+					<!-- Cant canciones por bailabilidad -->
+					<section>
+						<h3>Cantidad de canciones según bailabilidad</h3>
+						<h3><i class="fa-solid fa-chart-column"></i></h3>
+						<p>
+							<img src="img/categorical_danceability_graph.svg" alt="">
+						</p>
+					</section>
+
+					<!-- Cant cacnc por género -->
+					<section>
+						<h3>Cantidad de canciones por género</h3>
+						<h3><i class="fa-solid fa-chart-column"></i></h3>
+						<p>
+							<img src="img/genre_graph.svg" alt="">
+						</p>
+					</section>
+
+					<!-- Cant canc por tema -->
+					<section>
+						<h3>Cantidad de canciones por tema que tratan</h3>
+						<h3><i class="fa-solid fa-chart-column"></i></h3>
+						<p>
+							<img src="img/topic_graph.svg" alt="">
+						</p>
+					</section>
+
+					<!-- Explicación -->
+					<section>
+						<h2>Obtención de los resultados</h2>
+						<h2><i class="fa-brands fa-uncharted"></i></h2>
+						<p>
+						Para generar los datos, se desarrolló un <em>script</em> de <em>python</em> que es análogo al <em>notebook</em> de <em>Jupyter</em> con la diferencia de que es procesa todo automáticamente.
+						</p>
+					</section>
+
+				</section>
+
+				<!-- Problema 1 del laboratorio -->
+				<section>
+					<!-- Problema 1 -->
+					<section>
+						<h2>Problema 1</h2>
+						<h2>Análisis mediante probabilidad clásica</h2>
+						<h3><i class="fa-solid fa-user-gear"></i></h3>
+						<ul>
+							<li>¿Qué tan probable es que una canción hable de tristeza?</li>
+							<li>¿Cuál es la posibilidad que una canción sea de género jazz?</li>
+						</ul>
+					</section>
+
+					<!-- Resp 1 -->
+					<section>
+						<h3>Resultados de probabiliad clásica</h3>
+						<p class=small>
+						Según la definición clásica de la probabilidad, se toma la cardinalidad de los casos favorables y se divide entre el total de los casos posibles:
+						$$
+						P(A) ~=~ \frac{n(A)}{n(S)}
+						$$
+						</p>
+						<ul>
+							<li>Probabilidad de que una canción hable de tristeza: 0.21486</li>
+							<li>Probabilidad de que una canción se del género jazz: 0.13552</li>
+						</ul>
+					</section>
+
+					<!-- Código utilizado -->
+					<section>
+						<h3>Código que lleva a la solución</h3>
+						<p class=small>
+						Estos resultados se obtienen mediante el cálculo de las frecuencias relativas de cada categoría en estudio, datos por la siguiente función.
+						</p>
+						<pre>
+							<code>
+								def obtener_frecuencias_relativas(dataframe):
+								    '''
+								        Se encarga de obtener las frecuencias relativas para las variables
+								    categóricas en estudio
+								    '''
+								    # Columnas a estudiar
+								    variables_categoricas = ['categorical_loudness', 'genre', 'topic']
+								    
+								    # Variable de salida
+								    frecuencias = {}
+								    
+								    # Se recorren las variables categóricas para obtener su frecuencia relativa
+								    for i in variables_categoricas:
+								        dict_tmp = {}   # Variable temporal
+								        # Luego, se recorre la cantidad de elementos de cada columna para
+								        # obtener su frecuencia relativa
+								        for j, k in dataframe[i].value_counts().items():
+								            # El formato de los datos es el siguiente:
+								            # "nombre de categoría" = frecuencia relativa
+								            dict_tmp[j] = k/cant_canciones
+								        frecuencias[i] = dict_tmp
+								        
+								    return frecuencias
+							</code>
+						</pre>
+					</section>
+				</section>
+
+
+				<!-- Problema 2 del laboratorio -->
+				<section>
+					<!-- Problema 2 -->
+					<section>
+						<h2>Problema 2</h2>
+						<h2>Análisis mediante probabilidad condicional</h2>
+						<h3><i class="fa-solid fa-user-gear"></i></h3>
+						<ul>
+							<li>¿Qué tan probables es que una canción que hable de violencia tenga un volumen considerado alto?</li>
+							<li>Si una cancón es triste, ¿cuál es la probabilidad de que también sea de género pop? </li>
+						</ul>
+					</section>
+
+					<!-- Resp 2 -->
+					<section>
+						<h3>Resultados para la probabiliad condicional</h3>
+						<p class=small>
+						Esto se obtiene tomando la proporción del una categoría, la primera en ambos casos, entre el total de la otra.
+						</p>
+						<ul>
+							<li>Caso de violencia y volumen alto: 0.12717</li>
+							<li>Caso de tema de tristeza y género pop: 0.059989</li>
+						</ul>
+					</section>
+
+					<!-- Código utilizado -->
+					<section>
+						<h3>Código que lleva a la solución</h3>
+						<p class=small>
+						Esto se logró haciendo una serie de datos con todas las coincidencias, tomando sus longitudes y sacando las probabilidades de ahí:
+						</p>
+						<pre>
+							<code>
+								violencia_and_vol_alto = musica[(musica['topic'] == 'violence') &
+								                           (musica['categorical_loudness'] == 'high')]
+								prob_violencia_and_vol_alto = len(violencia_and_vol_alto)/cant_canciones
+								# Caso 2 Hable de tristeza & Pop
+								tristeza_and_pop = musica[(musica['topic'] == 'sadness') &
+								                           (musica['genre'] == 'pop')]
+								prob_tristeza_and_pop = len(tristeza_and_pop)/cant_canciones
+							</code>
+						</pre>
+					</section>
+				</section>
+
+
+				<!-- Problema 3 del laboratorio -->
+				<section>
+					<!-- Problema 3 -->
+					<section>
+						<h2>Problema 3</h2>
+						<h2>Pruebas de Bernoulli</h2>
+						<h3><i class="fa-solid fa-user-gear"></i></h3>
+						<p>
+						De tomar diez canciones al azar de la lista completa:
+						</p>
+						<ul>
+							<li>¿Qué tan probable es que dos sean bailables?</li>
+							<li>¿Cuál es la probabilidad de que cinco sean bailables?</li>
+						</ul>
+					</section>
+
+					<!-- Resp 3 -->
+					<section>
+						<h3>Resultados de las pruebas de Bernoulli</h3>
+						<p class=small>
+						En ambos casos, se parte de las frecuencias relativas obtenidas para el primer problema y se sigue según la fórmula que describe las pruebas de Bernoulli:
+						$$
+						P = \binom{N}{k} p^{k} \cdot (1-p)^{N-k}
+						$$
+						Donde <em>N</em> es la cantidad de canciones a escoger, <em>k</em> la cantidad favorable deseada y <em>p</em> la probabilidad de que las canciones sean bailables.
+						</p>
+						<ul>
+							<li>Para cuando se toman dos canciones: 0.03857</li>
+							<li>Para el caso de cinco: 0.24553</li>
+						</ul>
+					</section>
+
+					<!-- Código utilizado -->
+					<section>
+						<h3>Código que lleva a la solución</h3>
+						<p class=small>
+						Esto se logró mediante la ecuación de las pruebas:
+						</p>
+						<pre>
+							<code>
+								# Cantidad total de canciones categóricas (bailables y no bailables)
+								total_canciones = cantidad_bailable + cantidad_no_bailable
+								
+								# Probabilidades de ser bailable o no bailable
+								p_bailables = cantidad_bailable / total_canciones
+								p_no_bailables = cantidad_no_bailable / total_canciones
+								
+								# Muestra de 10 canciones
+								n = 10
+								
+								# Elegir 2 canciones bailables
+								k_1 = 2
+								probabilidad_2_bailables = (comb(n, k_1)) * (p_bailables**k_1) * ((1 - p_bailables)**(n - k_1))
+								
+								# Elegir 5 canciones bailables
+								k_2 = 5
+								probabilidad_5_bailables = (comb(n, k_2)) * (p_bailables**k_2) * ((1 - p_bailables)**(n - k_2))
+							</code>
+						</pre>
+					</section>
+				</section>
+
+				<!-- Final -->
+				<section>
+					<h1>Gracias por su tiempo</h1>
+					<h2><i class="fa-solid fa-champagne-glasses"></i></h2>
+				</section>
+
+			</div>
+		</div>
+
+		<!-- Reveal.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/markdown/markdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/math/math.min.js"></script>
+
+		<!-- Bootstrap -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+		</script>
+	</body>
+</html>

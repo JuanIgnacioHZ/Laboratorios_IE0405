@@ -1,0 +1,21 @@
+Problemas:
+	1. ¿Cuál es la probabilidad de que una canción hable de tristeza?
+	2. ¿Qué tan probable es que una canción de género rock tenga un volumen alto?
+
+Presentación
+	Título
+	Integrantes
+	Set de datos escogido
+	Columnas que trae y número de datos
+	Ejemplo de datos
+	Exploración de los tados:
+		Loudness y categorical loudness
+		Genre
+		Topic
+	Problemas:
+		Prob clásica
+		Prob condicional
+		Pruebas de Bernoulli
+
+	Final
+
